@@ -36,6 +36,7 @@ RSpec.describe Api::V1::EmployeesController, type: :controller do
   describe "GET #tax_deductions" do
     it "returns a success response" do
       employee = Employee.create! valid_attributes
+      allow(EmployeeTaxService).to receive(:new).and_return(double(tax_details: {}))
       get :tax_deductions, params: {}
       expect(response).to be_successful
     end
